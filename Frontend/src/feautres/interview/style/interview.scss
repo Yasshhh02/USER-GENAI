@@ -1,0 +1,799 @@
+.interview-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #111a25;
+    color: #e8edf5;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .interview-layout {
+    width: 100%;
+    max-width: 1600px;
+    height: calc(100vh - 4rem);
+  
+    margin: 0 auto;
+  
+    display: grid;
+  
+    grid-template-columns:
+      250px
+      minmax(0, 1fr)
+      340px;
+  
+    overflow: hidden;
+  
+    background: #151f2b;
+  
+    border: 1px solid #29384a;
+    border-radius: 14px;
+  }
+  
+  
+  /* =========================
+     LEFT SIDEBAR
+  ========================= */
+  
+  .interview-sidebar {
+    height: 100%;
+    min-height: 0;
+  
+    padding: 2rem 1rem;
+  
+    border-right: 1px solid #29384a;
+  
+    background: #182331;
+  
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    .download-resume-btn {
+        margin-top: auto;
+        width: 100%;
+      }
+  }
+
+  
+  .sidebar-title {
+    margin: 0 0 1.5rem 0;
+  
+    padding-left: 0.5rem;
+  
+    font-size: 0.75rem;
+    font-weight: 700;
+  
+    letter-spacing: 0.2rem;
+  
+    color: #8f9baa;
+  }
+  
+  .sidebar-item {
+    width: 100%;
+  
+    display: flex;
+    align-items: center;
+  
+    gap: 0.8rem;
+  
+    padding: 1rem;
+  
+    margin-bottom: 0.6rem;
+  
+    border: none;
+    border-radius: 10px;
+  
+    background: transparent;
+  
+    color: #b7c0cc;
+  
+    font-size: 1rem;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    text-align: left;
+  
+    transition: 0.2s ease;
+  }
+  
+  .sidebar-item:hover {
+    background: #222f3e;
+  }
+  
+  .sidebar-item.active {
+    background: linear-gradient(
+      90deg,
+      #472b40,
+      #3b2938
+    );
+  
+    color: #ff5d96;
+  }
+  
+  .sidebar-item span {
+    font-size: 1.1rem;
+  }
+  
+  
+  /* =========================
+     CENTER COLUMN
+  ========================= */
+  
+  .interview-content {
+    height: 100%;
+    min-height: 0;
+  
+    padding: 2rem 3rem;
+  
+    box-sizing: border-box;
+  
+    display: flex;
+    flex-direction: column;
+  
+    overflow: hidden;
+  }
+  
+  .content-header {
+    flex-shrink: 0;
+  
+    display: flex;
+  
+    justify-content: space-between;
+    align-items: center;
+  
+    padding-bottom: 1rem;
+  
+    border-bottom: 1px solid #2d3b4d;
+  }
+  
+  .content-header h1 {
+    margin: 0;
+  
+    font-size: 1.7rem;
+  
+    color: #f2f4f8;
+  }
+  
+  .content-header p {
+    margin: 0.4rem 0 0;
+  
+    color: #9ca8b8;
+  
+    font-size: 0.95rem;
+  }
+  
+  .question-count {
+    flex-shrink: 0;
+  
+    padding: 0.6rem 0.9rem;
+  
+    border-radius: 10px;
+  
+    background: #243243;
+  
+    color: #b6c0ce;
+  
+    font-size: 0.85rem;
+  }
+  
+  
+  /* IMPORTANT:
+     CENTER AREA SCROLLS
+  */
+  
+  .questions-container {
+    flex: 1;
+  
+    min-height: 0;
+  
+    overflow-y: auto;
+  
+    padding: 1.2rem 0;
+  
+    display: flex;
+    flex-direction: column;
+  
+    gap: 0.7rem;
+  }
+  
+  
+  /* SCROLLBAR */
+  
+  .questions-container::-webkit-scrollbar,
+  .question-details::-webkit-scrollbar,
+  .roadmap-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .questions-container::-webkit-scrollbar-thumb,
+  .question-details::-webkit-scrollbar-thumb,
+  .roadmap-container::-webkit-scrollbar-thumb {
+    background: #45566b;
+  
+    border-radius: 20px;
+  }
+  
+  
+  /* =========================
+     QUESTION CARD
+  ========================= */
+  
+  .question-card {
+    flex-shrink: 0;
+  
+    background: #1b2735;
+  
+    border: 1px solid #33465c;
+  
+    border-radius: 12px;
+  
+    overflow: hidden;
+  }
+  
+  
+  /* CLOSED CARD */
+  
+  .question-header {
+    width: 100%;
+  
+    min-height: 84px;
+  
+    padding: 1rem;
+  
+    display: grid;
+  
+    grid-template-columns:
+      40px
+      minmax(0, 1fr)
+      30px;
+  
+    align-items: center;
+  
+    gap: 1rem;
+  
+    border: none;
+  
+    background: transparent;
+  
+    color: white;
+  
+    cursor: pointer;
+  
+    text-align: left;
+  }
+  
+  .question-number {
+    width: 38px;
+    height: 38px;
+  
+    display: flex;
+  
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 9px;
+  
+    background: linear-gradient(
+      135deg,
+      #ec3e78,
+      #bb315f
+    );
+  
+    color: white;
+  
+    font-weight: 700;
+  }
+  
+  .question-text {
+    font-size: 1rem;
+  
+    line-height: 1.5;
+  
+    font-weight: 650;
+  
+    color: #e6ebf2;
+  }
+  
+  .arrow {
+    color: #ff5d96;
+  
+    font-size: 1.3rem;
+  
+    text-align: center;
+  }
+  
+  
+  /* =========================
+     OPEN QUESTION
+  ========================= */
+  
+  .question-open {
+    border-color: #4a617a;
+  }
+  
+  
+  /*
+    VERY IMPORTANT FIX:
+  
+    Open card has MAX HEIGHT.
+  
+    It will NEVER keep growing
+    and destroying the layout.
+  */
+  
+  .question-details {
+    max-height: 260px;
+  
+    overflow-y: auto;
+  
+    padding:
+      0
+      4rem
+      1.5rem;
+  
+    box-sizing: border-box;
+  
+    border-top: 1px solid #344458;
+  }
+  
+  .detail-block {
+    padding: 1rem 0;
+  
+    border-bottom: 1px solid #344458;
+  }
+  
+  .detail-block:last-child {
+    border-bottom: none;
+  }
+  
+  .detail-block h4 {
+    margin: 0 0 0.6rem;
+  
+    color: #df7da4;
+  
+    font-size: 0.95rem;
+  }
+  
+  .detail-block p {
+    margin: 0;
+  
+    color: #b6c0ce;
+  
+    font-size: 0.95rem;
+  
+    line-height: 1.7;
+  }
+  
+  
+  /* =========================
+     RIGHT SIDEBAR
+  ========================= */
+  
+  .interview-summary {
+    height: 100%;
+    min-height: 0;
+  
+    padding: 2rem 1.2rem;
+  
+    box-sizing: border-box;
+  
+    border-left: 1px solid #29384a;
+  
+    background: #182331;
+  
+    overflow-y: auto;
+  }
+  
+  .summary-title {
+    margin: 0 0 1.2rem;
+  
+    font-size: 0.75rem;
+  
+    font-weight: 800;
+  
+    letter-spacing: 0.22rem;
+  
+    color: #9ba7b7;
+  }
+  
+  
+  /* MATCH SCORE */
+  
+  .match-section {
+    text-align: center;
+  }
+  
+  .match-section .summary-title {
+    text-align: left;
+  }
+  
+  .score-circle {
+    width: 110px;
+    height: 110px;
+  
+    margin: 0 auto;
+  
+    border: 4px solid #66d994;
+  
+    border-radius: 50%;
+  
+    display: flex;
+  
+    flex-direction: column;
+  
+    justify-content: center;
+    align-items: center;
+  
+    font-size: 2.4rem;
+  
+    font-weight: 800;
+  
+    color: #f4f6f8;
+  }
+  
+  .score-circle span {
+    font-size: 0.65rem;
+  
+    color: #98a4b3;
+  
+    margin-top: 0.2rem;
+  }
+  
+  .match-text {
+    margin-top: 1rem;
+  
+    color: #74c994;
+  
+    font-weight: 700;
+  
+    font-size: 0.9rem;
+  }
+  
+  
+  /* DIVIDER */
+  
+  .summary-divider {
+    height: 1px;
+  
+    background: #304054;
+  
+    margin: 1.8rem 0;
+  }
+  
+  
+  /* =========================
+     SKILL GAPS
+  ========================= */
+  
+  .skill-list {
+    display: flex;
+  
+    flex-direction: column;
+  
+    gap: 0.65rem;
+  }
+  
+  .skill-card {
+    min-height: 58px;
+  
+    padding: 0.8rem 0.9rem;
+  
+    display: flex;
+  
+    justify-content: space-between;
+    align-items: center;
+  
+    gap: 0.5rem;
+  
+    border-radius: 9px;
+  
+    box-sizing: border-box;
+  
+    font-weight: 650;
+  }
+  
+  .skill-card small {
+    text-transform: capitalize;
+  
+    font-size: 0.75rem;
+  
+    font-weight: 700;
+  }
+  
+  .skill-card.low {
+    background: #193832;
+  
+    color: #81c99f;
+  }
+  
+  .skill-card.medium {
+    background: #39352c;
+  
+    color: #e0bd70;
+  }
+  
+  .skill-card.high {
+    background: #422833;
+  
+    color: #e7798f;
+  }
+  
+  
+  /* =========================
+     MINI ROADMAP
+  ========================= */
+  
+  .mini-plan-list {
+    display: flex;
+  
+    flex-direction: column;
+  
+    gap: 0.55rem;
+  }
+  
+  .mini-plan {
+    min-height: 58px;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 0.7rem;
+  
+    padding: 0.6rem;
+  
+    border: 1px solid #34465b;
+  
+    border-radius: 9px;
+  
+    box-sizing: border-box;
+  }
+  
+  .mini-plan span {
+    min-width: 48px;
+  
+    padding: 0.45rem 0.35rem;
+  
+    border-radius: 7px;
+  
+    background: #3d2a40;
+  
+    color: #ed80a5;
+  
+    font-size: 0.75rem;
+  
+    font-weight: 700;
+  
+    text-align: center;
+  }
+  
+  .mini-plan p {
+    margin: 0;
+  
+    color: #c3ccd7;
+  
+    font-size: 0.82rem;
+  
+    line-height: 1.3;
+  }
+  
+  
+  /* =========================
+     ROADMAP
+  ========================= */
+  
+  .roadmap-section {
+    height: 100%;
+  
+    min-height: 0;
+  
+    display: flex;
+  
+    flex-direction: column;
+  }
+  
+  .roadmap-container {
+    flex: 1;
+  
+    min-height: 0;
+  
+    overflow-y: auto;
+  
+    padding: 1.5rem 0;
+  }
+  
+  .roadmap-item {
+    position: relative;
+  
+    display: flex;
+  
+    gap: 1.5rem;
+  
+    padding-bottom: 1.5rem;
+  
+    padding-left: 1rem;
+  }
+  
+  .roadmap-item:not(:last-child)::before {
+    content: "";
+  
+    position: absolute;
+  
+    left: 21px;
+  
+    top: 35px;
+  
+    bottom: -5px;
+  
+    width: 2px;
+  
+    background: #8d3658;
+  }
+  
+  .roadmap-dot {
+    position: relative;
+  
+    z-index: 2;
+  
+    width: 20px;
+    height: 20px;
+  
+    flex-shrink: 0;
+  
+    border: 4px solid #d8467d;
+  
+    border-radius: 50%;
+  
+    background: #1b2735;
+  }
+  
+  .roadmap-content {
+    padding-bottom: 0.5rem;
+  }
+  
+  .roadmap-heading {
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 0.8rem;
+  }
+  
+  .roadmap-heading span {
+    padding: 0.4rem 0.7rem;
+  
+    background: #3d2940;
+  
+    color: #ef75a1;
+  
+    border-radius: 7px;
+  
+    font-size: 0.8rem;
+  
+    font-weight: 700;
+  }
+  
+  .roadmap-heading h3 {
+    margin: 0;
+  
+    color: #e8edf5;
+  
+    font-size: 1.1rem;
+  }
+  
+  .roadmap-content ul {
+    margin: 0.8rem 0 0;
+  
+    padding-left: 1.2rem;
+  
+    color: #aeb8c6;
+  }
+  
+  .roadmap-content li {
+    margin-bottom: 0.5rem;
+  
+    line-height: 1.5;
+  }
+  
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  
+  @media (max-width: 1100px) {
+    .interview-layout {
+      grid-template-columns:
+        210px
+        minmax(0, 1fr)
+        290px;
+    }
+  
+    .interview-content {
+      padding: 1.5rem;
+    }
+  }
+  
+  
+  @media (max-width: 850px) {
+    .interview-page {
+      padding: 1rem;
+    }
+  
+    .interview-layout {
+      height: auto;
+  
+      min-height: calc(100vh - 2rem);
+  
+      grid-template-columns: 1fr;
+    }
+  
+    .interview-sidebar {
+      height: auto;
+  
+      border-right: none;
+  
+      border-bottom: 1px solid #29384a;
+  
+      display: flex;
+  
+      gap: 0.5rem;
+  
+      overflow-x: auto;
+    }
+  
+    .sidebar-title {
+      display: none;
+    }
+  
+    .sidebar-item {
+      width: auto;
+  
+      white-space: nowrap;
+  
+      margin: 0;
+    }
+  
+    .interview-content {
+      height: 700px;
+    }
+  
+    .interview-summary {
+      height: auto;
+  
+      border-left: none;
+  
+      border-top: 1px solid #29384a;
+    }
+    .download-resume-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+      
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+      }
+      
+      .download-spinner {
+        width: 16px;
+        height: 16px;
+      
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid white;
+      
+        border-radius: 50%;
+      
+        animation: spin 0.8s linear infinite;
+      }
+      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+  }
