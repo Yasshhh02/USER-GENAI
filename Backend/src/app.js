@@ -1,24 +1,24 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors')
-
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 
-
-
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://user-genai-1.onrender.com"
+    ],
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-    origin:process.env.FRONTEND_URL,
-    credentials:true
-}))
 
-const authRouter = require('./routes/auth.routes.js');
-const interviewRouter = require('./routes/interview.routes.js')
+const authRouter = require("./routes/auth.routes.js");
+const interviewRouter = require("./routes/interview.routes.js");
 
 app.use("/api/auth", authRouter);
-app.use("/api/interview",interviewRouter)
+app.use("/api/interview", interviewRouter);
 
 module.exports = app;
