@@ -46,8 +46,8 @@ async function registerUserController(req,res) {
 
     res.cookie('token', token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 24 * 60 * 60 * 1000
     });
     res.status(201).json({
@@ -133,7 +133,11 @@ async function logoutUserController(req, res) {
 
         console.log("BLACKLISTED TOKEN:", blacklistedToken);
 
-        res.clearCookie('token');
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+        });
 
         return res.status(200).json({
             message: "User Logged Out Successfully"
