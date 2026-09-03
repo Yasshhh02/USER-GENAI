@@ -252,25 +252,15 @@ const Interview = () => {
           >
             {loading ? (
             <>
-                <span className="spinner"></span>
-                Downloading...
+            <span className="spinner"></span>
+            Downloading...
             </>
-        ) : (
-         <>
-         <svg
-        height={"0.8rem"}
-        style={{ marginRight: "0.8rem" }}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-      >
-        <path d="M10.6144 17.7956..." />
-      </svg>
-
-      Download Resume
-    </>
-  )}
-</button>
+            ) : (
+            <>
+            ⬇️ Download Resume
+            </>
+        )}
+        </button>
         </aside>
 
 

@@ -83,25 +83,51 @@ async function getAllInterviewReportsController(req, res) {
 /**
 *@description Controller to generate resume PDF based on user self description, resume and job description.
 */
-async function generateResumedfController(req, res){
-    const { interviewReportId } = req.params
-    const interviewReport = await interviewReportModel.findById(interviewReportId)
-    if(!interviewReport){
-        return res.status(404).json({
-            message: "Interview report not found."
-        })
+async function generateResumedfController(req, res) {
+    try {
+        const { interviewReportId } = req.params;
+
+        console.log("PDF REQUEST ID:", interviewReportId);
+        console.log("USER ID:", req.user.id);
+
+        const interviewReport = await interviewReportModel.findOne({
+            _id: interviewReportId,
+            user: req.user.id
+        });
+
+        if (!interviewReport) {
+            return res.status(404).json({
+                message: "Interview report not found."
+            });
+        }
+
+        const { resume, jobDescription, selfDescription } = interviewReport;
+
+        console.log("GENERATING PDF...");
+
+        const pdfBuffer = await generateResumePdf({
+            resume,
+            jobDescription,
+            selfDescription
+        });
+
+        console.log("PDF GENERATED SUCCESSFULLY");
+
+        res.set({
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `attachment; filename=resume_${interviewReportId}.pdf`
+        });
+
+        return res.send(pdfBuffer);
+
+    } catch (error) {
+        console.error("PDF GENERATION ERROR:", error);
+
+        return res.status(500).json({
+            message: "Failed to generate resume PDF",
+            error: error.message
+        });
     }
-
-    const {resume,jobDescription,selfDescription} = interviewReport
-
-    const pdfBuffer = await generateResumePdf({resume , jobDescription, selfDescription})
-
-    res.set({
-        "Content-Type":"application/pdf",
-        "Content-Disposition":`attachment; filename = resume_${interviewReportId}.pdf`
-    })
-
-    res.send(pdfBuffer )
 }
 module.exports = {generateInterViewReportController,
     generateInterViewReportByIdController,
