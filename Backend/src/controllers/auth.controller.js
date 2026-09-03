@@ -48,6 +48,7 @@ async function registerUserController(req,res) {
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        partitioned: true,
         maxAge: 24 * 60 * 60 * 1000
     });
     res.status(201).json({
@@ -94,6 +95,7 @@ async function loginUserController(req,res){
         httpOnly: true,
         secure: true,
         sameSite: "none",
+        partitioned: true,
         maxAge: 24 * 60 * 60 * 1000
     });
     res.status(201).json({
@@ -136,7 +138,8 @@ async function logoutUserController(req, res) {
         res.clearCookie("token", {
             httpOnly: true,
             secure: true,
-            sameSite: "none"
+            sameSite: "none",
+            partitioned: true
         });
 
         return res.status(200).json({
