@@ -1,5 +1,4 @@
 const pdfParse = require("pdf-parse")
-const puppeteer = require("puppeteer")
 const {generateInterviewReport , generateResumePdf} = require("../services/ai.service")
 const interviewReportModel = require("../models/interviewReport.model")
 

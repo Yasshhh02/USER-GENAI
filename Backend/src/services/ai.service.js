@@ -1,5 +1,5 @@
 const { GoogleGenAI } = require('@google/genai');
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer');
 
 
 const ai = new GoogleGenAI({
@@ -176,21 +176,55 @@ evaluationSummary, contact, skillsMatch, or overallRecommendation.
 
     return JSON.parse(response.text);
 }
-async function generatePdfFromHtml(htmlContent){
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.setContent(htmlContent, {waitUntil: "networkidle2"})
+async function generatePdfFromHtml(htmlContent) {
+    let browser;
 
-    const pdfBuffer = await page.pdf({format:"A4" , margin: {
-        top: "20mm",
-        bottom: "20mm",
-        left: "15mm",
-        right: "15mm"
-    }})
+    try {
+        console.log("STARTING PDF GENERATION");
 
-    await browser.close()
+        browser = await puppeteer.launch({
+            headless: true,
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage"
+            ]
+        });
 
-    return pdfBuffer
+        console.log("BROWSER LAUNCHED");
+
+        const page = await browser.newPage();
+
+        await page.setContent(htmlContent, {
+            waitUntil: "networkidle0"
+        });
+
+        console.log("HTML SET");
+
+        const pdfBuffer = await page.pdf({
+            format: "A4",
+            printBackground: true,
+            margin: {
+                top: "15mm",
+                bottom: "15mm",
+                left: "15mm",
+                right: "15mm"
+            }
+        });
+
+        console.log("PDF GENERATED");
+
+        return Buffer.from(pdfBuffer);
+
+    } catch (error) {
+        console.error("PDF GENERATION ERROR:", error);
+        throw error;
+
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
+    }
 }
 
 async function generateResumePdf({
