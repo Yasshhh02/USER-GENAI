@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://user-genai-1.onrender.com"
+        "https://user-genai.onrender.com"
     ],
     credentials: true
 }));
